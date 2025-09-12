@@ -1,0 +1,91 @@
+🔎 1. Exploratory Data Analysis (EDA)
+
+    Basic structure
+
+        Check dataset shape, column types, class distribution (spam vs ham).
+
+        Look for duplicates and missing values.
+
+    Univariate analysis
+
+        Word counts distribution per message.
+
+        Message length distribution for spam vs ham.
+
+        Most common words in spam vs ham (word clouds or barplots).
+
+    Bivariate analysis
+
+        Compare average message length between spam and ham.
+
+        Compare most frequent bigrams/trigrams across classes.
+
+    Correlation heatmap
+
+        Correlation between engineered numerical features (length, word count, special characters).
+
+🛠 2. Data Preprocessing & Feature Engineering
+
+    Text cleaning: lowercase, remove punctuation/numbers, strip whitespace.
+
+        Remove stopwords and apply stemming/lemmatization.
+
+        Encode labels: spam = 1, ham = 0.
+
+    Feature extraction:
+
+        Bag of Words (CountVectorizer).
+
+        TF-IDF representation.
+
+        Additional features (message length, number of digits, number of uppercase words).
+
+📈 3. Modeling Practice
+
+    Baseline models
+
+        Naive Bayes (MultinomialNB).
+
+        Logistic Regression.
+
+    Tree-based models
+
+        Random Forest.
+
+        XGBoost / LightGBM.
+
+    Evaluation metrics
+
+        Accuracy, Precision, Recall, F1-score.
+
+        Confusion Matrix.
+
+        ROC Curve & AUC.
+
+    Validation
+
+        Stratified train-test split.
+
+        Cross-validation to reduce bias from imbalance.
+
+🔍 4. Deeper Analysis Questions
+
+    Which words are the strongest indicators of spam?
+
+    Are spam messages generally longer/shorter than ham messages?
+
+    Does TF-IDF improve performance over simple Bag-of-Words?
+
+    How does class imbalance affect results (spam < ham)?
+
+💡 Stretch Tasks (More Advanced)
+
+    Word embeddings (Word2Vec, GloVe, FastText).
+
+    Deep learning models (LSTM, GRU, BERT).
+
+    Hyperparameter tuning with GridSearchCV / RandomizedSearchCV.
+
+    Feature importance visualization (e.g., SHAP for Logistic Regression / XGBoost).
+
+    Deploy a Streamlit app: paste an email → predict spam/ham.
