@@ -40,3 +40,27 @@ print(f"Number of null values in each column: {num_null}")
 
 
 
+#Word counts distribution per message
+word_features = data.iloc[:, 0:48]
+word_counts = word_features.sum(axis=1)
+plt.figure(figsize=(10,6))
+sns.histplot(word_counts[data["class"]==0], bins=50, color="skyblue", label="Not Spam", kde=True)
+sns.histplot(word_counts[data["class"]==1], bins=50, color="salmon", label="Spam", kde=True)
+plt.title("Word Count Distribution per Message (Spam vs Not Spam)")
+plt.xlabel("Estimated Word Count")
+plt.ylabel("Number of Messages")
+plt.legend()
+plt.show()
+
+
+#message length distribution per message
+plt.figure(figsize=(10,6))
+sns.histplot(data=data[data["class"]==0]["capital_run_length_total"], 
+             bins=70, color="skyblue", label="Not Spam", kde=True)
+sns.histplot(data=data[data["class"]==1]["capital_run_length_total"], 
+             bins=70, color="salmon", label="Spam", kde=True)
+plt.title("Message Length Distribution per Message (Spam vs Not Spam)")
+plt.xlabel("length of Message")
+plt.ylabel("Number of Messages")
+plt.legend()
+plt.show()
