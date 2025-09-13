@@ -18,8 +18,6 @@
 
         Compare average message length between spam and ham.
 
-        Compare most frequent bigrams/trigrams across classes.
-
     Correlation heatmap
 
         Correlation between engineered numerical features (length, word count, special characters).

@@ -1,6 +1,10 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
+from sklearn.ensemble import RandomForestClassifier
 
 
 #load the dataset
@@ -39,7 +43,6 @@ num_null = data.isnull().sum()
 print(f"Number of null values in each column: {num_null}")
 
 
-
 #Word counts distribution per message
 word_features = data.iloc[:, 0:48]
 word_counts = word_features.sum(axis=1)
@@ -64,3 +67,47 @@ plt.xlabel("length of Message")
 plt.ylabel("Number of Messages")
 plt.legend()
 plt.show()
+
+
+#most common words in spam/not spam messages
+word_features = data.iloc[:, 0:48]
+word_counts = word_features.sum(axis=1)
+plt.figure(figsize=(10,6))
+sns.barplot(data= word_counts)
+
+
+#Compare average message length between spam and ham
+avg_len_spam = data[data["class"] == 1]["capital_run_length_total"].mean()
+avg_len_notspam = data[data["class"] == 0]["capital_run_length_total"].mean()
+print(f"Avarage length of spam messages: {avg_len_spam}")
+print(f"Avarage length of not spam messages: {avg_len_notspam}")
+
+
+#split data in train/test data
+X = data.drop(columns="class")
+y = data["class"]
+X_train, X_test, y_train, y_test = train_test_split(
+    X,y, test_size = 0.2, random_state = 42
+)
+
+
+#logistic  regression model
+logistic_model = LogisticRegression()
+logistic_model.fit(X_train, y_train)
+y_pred = logistic_model.predict(X_test)
+print("Logistic Regression Model:")
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Precision:", precision_score(y_test, y_pred))
+print("Recall:", recall_score(y_test, y_pred))
+print("F1 Score:", f1_score(y_test, y_pred))
+
+
+#random forest model
+randomforest_model = RandomForestClassifier(n_estimators=10, random_state=42)
+randomforest_model.fit(X_train,y_train)
+y_pred = randomforest_model.predict(X_test)
+print("Random Forest Model:")
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Precision:", precision_score(y_test, y_pred))
+print("Recall:", recall_score(y_test, y_pred))
+print("F1 Score:", f1_score(y_test, y_pred))
